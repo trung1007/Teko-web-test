@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import ProductGrid from './components/ProductGrid';
 import { IoIosCloudUpload } from "react-icons/io";
 import { Spinner } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
 
 function App() {
   const [data, setData] = useState<ApiResponse | null>(null);
@@ -17,6 +18,7 @@ function App() {
   const [nameError, setNameError] = useState('');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
+  const isMobileOrTablet = useMediaQuery({ query: '(max-width: 1024px)' });
 
   // Xử lý thay đổi input và kiểm tra lỗi
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,7 +115,8 @@ function App() {
           <Spinner animation="border" role="status" variant="primary" />
           <span className="ml-2">Đang tải...</span>
         </div>
-      ) : (<div className="w-1/4 h-full flex flex-col items-center bg-gray-200 p-3 gap-4">
+      ) : (<div className={`${isMobileOrTablet ? 'w-full' : 'w-1/4'
+        } h-screen flex flex-col items-center bg-gray-200 p-3 gap-4`}>
         <div>
           <span className="text-2xl font-bold">{data?.data[0].customAttributes?.label?.text}</span>
         </div>
