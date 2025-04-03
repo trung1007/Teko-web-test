@@ -1,38 +1,25 @@
 import React from "react";
 import ProductItem from "./ProductItem";
+import { useMediaQuery } from "react-responsive";
 
 type ProductGridProps = {
     productList: { name: string; price: number; imageSrc?: string }[];
 };
 
 const ProductGrid: React.FC<ProductGridProps> = ({ productList }) => {
+    const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
+
     return (
-        <div style={styles.scrollView}>
-            <div style={styles.gridContainer}>
+        <div className="mt-3 overflow-y-auto">
+            <div className={`grid gap-5 ${isTablet ? "grid-cols-3" : "grid-cols-2"}`}>
                 {productList.map((item) => (
-                    <div key={item.name} style={styles.gridItem}>
+                    <div key={item.name}>
                         <ProductItem name={item.name} price={item.price} imageSrc={item.imageSrc} />
                     </div>
                 ))}
             </div>
         </div>
     );
-};
-
-const styles: { [key: string]: React.CSSProperties } = {
-    scrollView: {
-        marginTop: "12px",
-        overflowY: "auto",
-    },
-    gridContainer: {
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-between",
-    },
-    gridItem: {
-        width: "48%",
-        marginBottom: "10px",
-    },
 };
 
 export default ProductGrid;

@@ -109,14 +109,15 @@ function App() {
   }, [data]);
 
   return (
-    <div className="w-screen h-full flex items-center justify-center">
+    <div className="w-screen h-full flex items-center justify-center p-2">
       {isLoading ? (
         <div className="flex justify-center items-center w-full h-full">
           <Spinner animation="border" role="status" variant="primary" />
           <span className="ml-2">Đang tải...</span>
         </div>
-      ) : (<div className={`${isMobileOrTablet ? 'w-full' : 'w-1/4'
-        } h-screen flex flex-col items-center bg-gray-200 p-3 gap-4`}>
+      ) : (<div className={`${isMobileOrTablet ? 'w-full' : 'w-1/4'}
+        h-full flex flex-col items-center p-3 gap-4 
+        border border-gray-300 rounded-lg shadow-lg`}>
         <div>
           <span className="text-2xl font-bold">{data?.data[0].customAttributes?.label?.text}</span>
         </div>
