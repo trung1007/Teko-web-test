@@ -10,7 +10,6 @@ import { useMediaQuery } from 'react-responsive';
 function App() {
   const [data, setData] = useState<ApiResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
   const [productList, setProductList] = useState<ProductItemType[]>([]);
   const [productName, setProductName] = useState('');
   const [price, setPrice] = useState('');
@@ -92,7 +91,7 @@ function App() {
       const result = await res.json();
       setData(result);
     } catch (err) {
-      setError('Lỗi khi tải dữ liệu');
+      console.log('Lỗi khi tải dữ liệu');;
     } finally {
       setIsLoading(false);
     }
